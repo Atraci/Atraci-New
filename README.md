@@ -1,6 +1,6 @@
 # Desktube
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.3.
+Reviving Atraci back to life, Written completly from scratch, currently unusable, needs help on development :)
 
 ## Development server
 
