@@ -1,0 +1,17 @@
+<form class="inline-form">
+  <div class="form-group">
+    <input type="text" placeholder="search" class="form-control" [(ngModel)]="searchTerm" (keyup)="keyUp.next($event)" name="search">
+  </div>
+</form>
+
+<div class="searchResults row no-gutters" *ngIf="searchResults">
+
+  <div class="card col-sm-2 m-2" *ngFor="let searchItem of searchResults">
+    <img class="card-img-top" [src]="searchItem.mediumImage || searchItem.smallImage" alt="{{ searchItem.title }}">
+    <div class="card-block">
+      <h5 class="card-title">{{ searchItem.title }}</h5>
+      <h6>{{ searchItem.artist }}</h6>
+      <p class="text-muted">{{ searchItem.source }}</p>
+    </div>
+  </div>
+</div>

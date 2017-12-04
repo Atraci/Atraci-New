@@ -1,0 +1,8 @@
+@import "../assets/css/main-colors";
+
+:host {
+  .logo-header {
+    background-color: $bg-dark;
+    color: $bg-light;
+  }
+}

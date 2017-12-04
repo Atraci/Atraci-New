@@ -1,0 +1,39 @@
+@import "../../../assets/css/main-colors";
+
+:host {
+  background-color: $bg-dark;
+  color: #fff;
+
+  .cover-image-wrapper {
+    display: block;
+    height: 100%;
+    width: 100px;
+    background-color: $bg-light;
+  }
+
+  .progress {
+    border-radius: 0;
+
+    .progress-bar {
+      background-color: $bg-light-blue;
+    }
+  }
+
+  .controls {
+    .oi {
+      color: #ffffff;
+      background-color: $bg-light-blue;
+      width: 2.4em;
+      height: 2.4em;
+      border-radius: 10em;
+      line-height: 2.5em;
+      text-align: center;
+
+      &:hover {
+        opacity: 0.9;
+        cursor: pointer;
+      }
+
+    }
+  }
+}
