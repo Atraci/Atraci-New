@@ -1,5 +1,7 @@
 <div class="full-height">
-  <div class="cover-image-wrapper d-block float-left no-overflow"></div>
+  <div class="cover-image-wrapper d-block float-left no-overflow">
+    <img [src]="playerControl.currentPlayingTrack.mediumImage" alt="playerControl.currentPlayingTrack.title">
+  </div>
   <div class="controls no-overflow">
 
     <div class="row no-gutters">
@@ -17,19 +19,19 @@
     <div class="row no-gutters">
 
       <div class="col-2">
-        <span class="track-title d-block">Suliman</span>
-        <span class="track-artist d-block">Infected Mushroom</span>
+        <span class="track-title d-block">{{ playerControl.currentPlayingTrack.title || 'Unknown'}}</span>
+        <span class="track-artist d-block">{{ playerControl.currentPlayingTrack.artist || 'Unknown' }}</span>
       </div>
 
       <div class="col text-center">
-        <div class="oi oi-media-step-backward" title="icon name" aria-hidden="true"></div>
-        <div class="oi oi-media-play" title="icon name" aria-hidden="true"></div>
-        <div class="oi oi-media-stop" title="icon name" aria-hidden="true"></div>
-        <div class="oi oi-media-step-forward" title="icon name" aria-hidden="true"></div>
-        <span class="oi oi-random" title="icon name" aria-hidden="true"></span>
-        <span class="oi oi-loop-square" title="icon name" aria-hidden="true"></span>
-        <span class="oi oi-loop" title="icon name" aria-hidden="true"></span>
-        <span class="oi oi-plus" title="icon name" aria-hidden="true"></span>
+        <div class="oi oi-media-step-backward" title="Previous" aria-hidden="true" (click)="prev()"></div>
+        <div class="oi oi-media-play" title="Play" aria-hidden="true" (click)="play()"></div>
+        <div class="oi oi-media-stop" title="Stop" aria-hidden="true" (click)="stop()"></div>
+        <div class="oi oi-media-step-forward" title="Next" aria-hidden="true" (click)="next()"></div>
+        <span class="oi oi-random" title="Random" aria-hidden="true" (click)="random()"></span>
+        <span class="oi oi-loop-square" title="Shuffle" aria-hidden="true" (click)="shuffle()"></span>
+        <span class="oi oi-loop" title="Loop" aria-hidden="true" (click)="play()"></span>
+        <span class="oi oi-plus" title="Add to playlist" aria-hidden="true" (click)="addToPlaylist()"></span>
       </div>
 
       <div class="col-2 text-right">
@@ -38,6 +40,7 @@
     </div>
 
   </div>
+
   <div id="player"></div>
 
 </div>

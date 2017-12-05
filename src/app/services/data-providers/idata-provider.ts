@@ -6,8 +6,11 @@ export interface IdataProvider {
   clientId: string;
   entities;
 
-  callToAPI(entity: string, queryParams?: Object): Observable;
+  callToAPI(entity: string, queryParams?: Object): Observable<Object>;
+
   buildQueryParamsFromObject(queryParamsObject: Object): string;
-  doSearch(searchVal: string): Observable;
+
+  doSearch(searchVal: string): Observable<Object>;
+
   translateRequest(res): Array<TrackModel>;
 }

@@ -5,4 +5,5 @@ export class TrackModel {
   public mediumImage: string;
   public largeImage: string;
   public source: string;
+  public videoId: string;
 }

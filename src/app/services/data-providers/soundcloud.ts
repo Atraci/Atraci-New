@@ -5,21 +5,21 @@ import {IdataProvider} from "./idata-provider";
 
 @Injectable()
 export class Soundcloud implements IdataProvider  {
-  private readonly url: string = "https://api.soundcloud.com/";
-  private readonly clientId: string = "dead160b6295b98e4078ea51d07d4ed2";
-  private readonly entities = {
+  public readonly url: string = "https://api.soundcloud.com/";
+  public readonly clientId: string = "dead160b6295b98e4078ea51d07d4ed2";
+  public readonly entities = {
     SEARCH : "tracks"
   };
 
   constructor(private http: HttpClient) {
   }
 
-  private callToAPI(entity: string, queryParams) {
+  public callToAPI(entity: string, queryParams) {
     let self = this;
     return self.http.get(this.url + entity + self.buildQueryParamsFromObject(queryParams));
   }
 
-  private buildQueryParamsFromObject(queryParamsObject: Object): string {
+  public buildQueryParamsFromObject(queryParamsObject: Object): string {
     let str = [];
 
     queryParamsObject["client_id"] = this.clientId;

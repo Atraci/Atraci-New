@@ -1,25 +1,25 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from '@angular/core';
-import {TrackModel} from "../../components/main-view/track/track-model";
-import {IdataProvider} from "./idata-provider";
+import { TrackModel } from "../../components/main-view/track/track-model";
+import { IdataProvider } from "./idata-provider";
 
 @Injectable()
 export class Itunes implements IdataProvider {
-  private readonly url: string = "https://itunes.apple.com/";
-  private readonly clientId: string = "";
-  private readonly entities = {
+  public readonly url: string = "https://itunes.apple.com/";
+  public readonly clientId: string;
+  public readonly entities = {
     SEARCH : "search"
   };
 
   constructor(private http: HttpClient) {
   }
 
-  private callToAPI(entity: string, queryParams) {
+  public callToAPI(entity: string, queryParams) {
     let self = this;
     return self.http.get(this.url + entity + self.buildQueryParamsFromObject(queryParams));
   }
 
-  private buildQueryParamsFromObject(queryParamsObject: Object): string {
+  public buildQueryParamsFromObject(queryParamsObject: Object): string {
     let str = [];
 
     queryParamsObject["entity"] = "musicTrack";

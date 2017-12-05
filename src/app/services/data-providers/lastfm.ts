@@ -5,22 +5,22 @@ import {IdataProvider} from "./idata-provider";
 
 @Injectable()
 export class Lastfm implements IdataProvider  {
-  private readonly url: string = "http://ws.audioscrobbler.com/2.0/";
-  private readonly clientId: string = "e98a0a2057210b9e8801e9e6c8be3ddd";
-  private readonly entities = {
+  public readonly url: string = "http://ws.audioscrobbler.com/2.0/";
+  public readonly clientId: string = "e98a0a2057210b9e8801e9e6c8be3ddd";
+  public readonly entities = {
     SEARCH : "track.search"
   };
 
   constructor(private http: HttpClient) {
   }
 
-  private callToAPI(entity: string, queryParams) {
+  public callToAPI(entity: string, queryParams) {
     let self = this;
     queryParams['method'] = entity;
     return self.http.get(this.url + self.buildQueryParamsFromObject(queryParams));
   }
 
-  private buildQueryParamsFromObject(queryParamsObject: Object): string {
+  public buildQueryParamsFromObject(queryParamsObject: Object): string {
     let str = [];
 
     queryParamsObject["api_key"] = this.clientId;

@@ -9,8 +9,8 @@ import { AppComponent } from './app.component';
 import { PlayerComponent } from './components/player/player.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 
-
 import { YoutubeDalService } from './services/youtube-dal.service';
+import { PlayerControlService } from './components/player/player-control.service';
 
 
 @NgModule({
@@ -26,7 +26,8 @@ import { YoutubeDalService } from './services/youtube-dal.service';
     HttpClientModule
   ],
   providers: [
-    YoutubeDalService
+    YoutubeDalService,
+    PlayerControlService
   ],
   bootstrap: [AppComponent]
 })

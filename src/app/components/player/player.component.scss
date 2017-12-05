@@ -9,6 +9,10 @@
     height: 100%;
     width: 100px;
     background-color: $bg-light;
+
+    img {
+      width: 100%;
+    }
   }
 
   .progress {

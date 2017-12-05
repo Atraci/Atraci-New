@@ -5,21 +5,21 @@ import {IdataProvider} from "./idata-provider";
 
 @Injectable()
 export class Youtube implements IdataProvider {
-  private readonly url: string = "https://www.googleapis.com/youtube/v3/";
-  private readonly entities = {
+  public readonly url: string = "https://www.googleapis.com/youtube/v3/";
+  public readonly entities = {
     SEARCH : "search"
   };
-  private readonly clientId: string = "AIzaSyBSBOpf06j_i8IoQE9z-fcrBpAQVvs8y8A";
+  public readonly clientId: string = "AIzaSyBSBOpf06j_i8IoQE9z-fcrBpAQVvs8y8A";
 
   constructor(private http: HttpClient) {
   }
 
-  private callToAPI(entity: string, queryParams) {
+  public callToAPI(entity: string, queryParams) {
     let self = this;
     return self.http.get(this.url + entity + self.buildQueryParamsFromObject(queryParams));
   }
 
-  private buildQueryParamsFromObject(queryParamsObject: Object): string {
+  public buildQueryParamsFromObject(queryParamsObject: Object): string {
     let str = [];
 
     queryParamsObject["key"] = this.clientId;
