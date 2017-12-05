@@ -29,7 +29,7 @@
           <div *ngSwitchDefault class="oi oi-media-play" title="Play" aria-hidden="true" (click)="callToAction(playerAction.PLAY)"></div>
           <div *ngSwitchCase="playerState.PLAYING" class="oi oi-media-pause" title="Play" aria-hidden="true" (click)="callToAction(playerAction.PAUSE)"></div>
         </ng-container>
-        <div class="oi oi-media-stop" title="Stop" aria-hidden="true" (click)="callToAction(playerAction.STOP)"></div>
+        <!--<div class="oi oi-media-stop" title="Stop" aria-hidden="true" (click)="callToAction(playerAction.STOP)"></div>-->
         <div class="oi oi-media-step-forward" title="Next" aria-hidden="true" (click)="callToAction(playerAction.NEXT)"></div>
         <div class="oi oi-random" title="Random" aria-hidden="true" (click)="callToAction(playerAction.RANDOM)"></div>
         <div class="oi oi-loop-square" title="Shuffle" aria-hidden="true" (click)="callToAction(playerAction.SHUFFLE)"></div>
