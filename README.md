@@ -1,3 +1,5 @@
+[![Gitter](https://badges.gitter.im/Atraci/Atraci.svg)](https://gitter.im/Atraci/Atraci?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 # Desktube
 
 Reviving Atraci back to life, Written completly from scratch, currently unusable, needs help on development :)
