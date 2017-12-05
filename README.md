@@ -8,10 +8,15 @@ Reviving Atraci back to life, Written completly from scratch, currently unusable
 - Playlist (Service, Component)
 - Settings (Service, Component)
 - Themes (Service)
+  * css only, provided from storage
 - I10N (Service, Pipe)
 - Notifications (Service, Component)
+  * Error popups
 - Short Keys (Service)
 - REDESIGN!
+- Player:
+  * Full duplex integration with YT Frame player
+  * Progress bar (playing progress + loading progress)
 
 ## Done
 - Metadata fetch

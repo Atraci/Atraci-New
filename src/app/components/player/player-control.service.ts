@@ -4,6 +4,9 @@ import {PlayerState} from "./player-state.enum";
 import {Youtube} from "../../services/data-providers/youtube";
 import {YoutubeDalService} from "../../services/youtube-dal.service";
 import {PlayerAction} from "./player-action.enum";
+import * as moment from "moment";
+
+const Barn = require("barn");
 
 @Injectable()
 export class PlayerControlService {
@@ -11,10 +14,16 @@ export class PlayerControlService {
   private _currentPlayingTrack: TrackModel = new TrackModel();
 
   public currentPlayerState: PlayerState = PlayerState.NONE;
+  public playerProgress = {
+    total: "00:00",
+    current: "00:00",
+    percent: 0
+  };
+  public barn;
   public timer;
 
   constructor(private yt: Youtube, private ytDal: YoutubeDalService) {
-
+    this.barn = new Barn(localStorage);
   }
 
   set currentPlayingTrack(value: TrackModel) {
@@ -27,7 +36,10 @@ export class PlayerControlService {
       self.ytDal.setVideo(value);
       self._currentPlayingTrack = value;
 
-      self.state = PlayerState.PLAYING;
+      // self.barn.sadd("history", JSON.stringify(value));
+      // console.log(self.barn.smembers("history"));
+
+      self.callToAction(PlayerAction.PLAY);
     });
   }
 
@@ -49,12 +61,34 @@ export class PlayerControlService {
   }
 
   initTimer() {
-    debugger;
     let self = this;
-    // while(true) {
-    //   console.log("self.ytDal.videoLoadingDone", self.ytDal.videoLoadingDone);
-    //   //self.timer = self.ytDal.player;
-    // }
+    debugger;
+    self.timer = setInterval(() => {
+      //self.playerProgress.total = moment(self.ytDal.player.getDuration(), "mm").format("mm:ss");
+      let duration = self.ytDal.player.getDuration();
+      let current = self.ytDal.player.getCurrentTime();
+      self.playerProgress.total = self.formatTime(duration);
+      self.playerProgress.current = self.formatTime(current);
+
+      if(duration && current) {
+        self.playerProgress.percent = (current / duration) * 100;
+      }
+    }, 1000);
+  }
+
+  resetTimer() {
+    let self = this;
+    clearTimeout(self.timer);
+  }
+
+  formatTime(time: number) {
+    time = Math.round(time);
+    let minutes = Math.floor(time / 60);
+    let seconds = time - minutes * 60;
+
+    let minutesFormatted = minutes < 10 ? `0${minutes}` : minutes;
+    let secondsFormatted = seconds < 10 ? `0${seconds}` : seconds;
+    return `${minutesFormatted}:${secondsFormatted}`
   }
 
   callToAction(action: PlayerAction) {
@@ -69,11 +103,13 @@ export class PlayerControlService {
       case PlayerAction.STOP:
         self.ytDal.player["stopVideo"]();
         self.state = PlayerState.STOPPED;
+        self.resetTimer();
         break;
 
       case PlayerAction.PAUSE:
         self.ytDal.player["pauseVideo"]();
         self.state = PlayerState.PAUSED;
+        self.resetTimer();
         break;
     }
   }

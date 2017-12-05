@@ -7,7 +7,7 @@
     <div class="row no-gutters">
       <div class="col">
         <div class="progress">
-          <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">01:12 / 03:49</div>
+          <div class="progress-bar" role="progressbar" style="transition: all 1s" [style.width]="playerControl.playerProgress.percent + '%'" [attr.aria-valuenow]="playerControl.playerProgress.percent" aria-valuemin="0" aria-valuemax="100">{{ playerControl.playerProgress.current }} / {{ playerControl.playerProgress.total }}</div>
         </div>
       </div>
     </div>
