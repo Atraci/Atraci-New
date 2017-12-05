@@ -2,6 +2,21 @@
 
 Reviving Atraci back to life, Written completly from scratch, currently unusable, needs help on development :)
 
+## TBD
+- History (Service, Component)
+- Favorites (Service, Component)
+- Playlist (Service, Component)
+- Settings (Service, Component)
+- Themes (Service)
+- I10N (Service, Pipe)
+- Notifications (Service, Component)
+- Short Keys (Service)
+- REDESIGN!
+
+## Done
+- Metadata fetch
+- Youtube player integration
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
