@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { TrackModel } from "./track-model";
+import {PlayerControlService} from "../../player/player-control.service";
 
 @Component({
   selector: 'app-track',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrackComponent implements OnInit {
 
-  constructor() { }
+  @Input() trackModel: TrackModel;
+
+  constructor(private playerController: PlayerControlService) { }
 
   ngOnInit() {
   }
 
+  isCurrentPlayingItem(): boolean {
+    let self = this;
+    return self.trackModel === self.playerController.currentPlayingTrack;
+  }
+
+  itemClicked(): void {
+    let self = this;
+    self.playerController.currentPlayingTrack = self.trackModel;
+  }
 }

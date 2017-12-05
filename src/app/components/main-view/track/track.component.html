@@ -1,3 +1,17 @@
-<p>
-  track works!
-</p>
+<div class="card" (click)="itemClicked()">
+
+  <div class="card-img-top">
+    <div class="controls" [ngClass]="{ 'current-playing': isCurrentPlayingItem() }">
+      <div class="oi oi-media-play" title="Play" aria-hidden="true"></div>
+    </div>
+
+    <img [src]="trackModel.mediumImage || trackModel.smallImage" alt="{{ trackModel.title }}">
+  </div>
+
+  <div class="card-block">
+    <h5 class="card-title">{{ trackModel.title }}</h5>
+    <h6>{{ trackModel.artist }}</h6>
+    <h6 class="text-muted">{{ trackModel.source }}</h6>
+  </div>
+
+</div>

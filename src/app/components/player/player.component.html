@@ -24,14 +24,17 @@
       </div>
 
       <div class="col text-center">
-        <div class="oi oi-media-step-backward" title="Previous" aria-hidden="true" (click)="prev()"></div>
-        <div class="oi oi-media-play" title="Play" aria-hidden="true" (click)="play()"></div>
-        <div class="oi oi-media-stop" title="Stop" aria-hidden="true" (click)="stop()"></div>
-        <div class="oi oi-media-step-forward" title="Next" aria-hidden="true" (click)="next()"></div>
-        <span class="oi oi-random" title="Random" aria-hidden="true" (click)="random()"></span>
-        <span class="oi oi-loop-square" title="Shuffle" aria-hidden="true" (click)="shuffle()"></span>
-        <span class="oi oi-loop" title="Loop" aria-hidden="true" (click)="play()"></span>
-        <span class="oi oi-plus" title="Add to playlist" aria-hidden="true" (click)="addToPlaylist()"></span>
+        <div class="oi oi-media-step-backward" title="Previous" aria-hidden="true" (click)="callToAction(playerAction.PREV)"></div>
+        <ng-container [ngSwitch]="playerControl.currentPlayerState">
+          <div *ngSwitchDefault class="oi oi-media-play" title="Play" aria-hidden="true" (click)="callToAction(playerAction.PLAY)"></div>
+          <div *ngSwitchCase="playerState.PLAYING" class="oi oi-media-pause" title="Play" aria-hidden="true" (click)="callToAction(playerAction.PAUSE)"></div>
+        </ng-container>
+        <div class="oi oi-media-stop" title="Stop" aria-hidden="true" (click)="callToAction(playerAction.STOP)"></div>
+        <div class="oi oi-media-step-forward" title="Next" aria-hidden="true" (click)="callToAction(playerAction.NEXT)"></div>
+        <div class="oi oi-random" title="Random" aria-hidden="true" (click)="callToAction(playerAction.RANDOM)"></div>
+        <div class="oi oi-loop-square" title="Shuffle" aria-hidden="true" (click)="callToAction(playerAction.SHUFFLE)"></div>
+        <div class="oi oi-loop" title="Loop" aria-hidden="true" (click)="callToAction(playerAction.LOOP)"></div>
+        <div class="oi oi-plus" title="Add to playlist" aria-hidden="true" (click)="callToAction(playerAction.ADD_TO_PLAYLIST)"></div>
       </div>
 
       <div class="col-2 text-right">
@@ -41,6 +44,8 @@
 
   </div>
 
-  <div id="player"></div>
+  <div class="player-video-wrapper">
+    <div id="player"></div>
+  </div>
 
 </div>

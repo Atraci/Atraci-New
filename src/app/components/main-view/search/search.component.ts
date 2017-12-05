@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Youtube} from "../../../services/data-providers/youtube";
+import {TrackModel} from "../track/track-model";
+import {Subject, Observable} from "rxjs";
+
 import {Lastfm} from "../../../services/data-providers/lastfm";
 import {Itunes} from "../../../services/data-providers/itunes";
 import {Soundcloud} from "../../../services/data-providers/soundcloud";
-import {Subject, Observable} from "rxjs";
-import {TrackModel} from "../track/track-model";
-import {PlayerControlService} from "../../player/player-control.service";
 
 @Component({
   selector: 'app-search',
@@ -18,9 +17,22 @@ export class SearchComponent implements OnInit {
   public searchTerm: string;
   public searchResults: Array<TrackModel> = [];
 
-  constructor(private playerController: PlayerControlService,private yt: Youtube, private lastfm: Lastfm, private itunes: Itunes, private soundcloud: Soundcloud) {
+  private supportedSearchProviders: Array<string> = [
+    'lastfm',
+    'itunes',
+    'soundcloud'
+  ];
+
+  constructor(private lastfm: Lastfm, private itunes: Itunes, private soundcloud: Soundcloud) {
     let self = this;
-    this.keyUp
+  }
+
+  ngOnInit() {
+    let self = this;
+
+    self.doSearch("Skazi");
+
+    self.keyUp
       .map(event => (event["target"]["value"]))
       .debounceTime(1000)
       .distinctUntilChanged()
@@ -30,23 +42,13 @@ export class SearchComponent implements OnInit {
       });
   }
 
-  ngOnInit() {
-    this.doSearch("Top 100");
-  }
-
-  trackItemClicked(item) {
-    let self = this;
-    self.playerController.currentPlayingTrack = item;
-  }
-
   doSearch(searchTerm) {
-    let self = this,
-      searchProviders: Array<string> = ['lastfm', 'itunes', 'soundcloud'];
+    let self = this;
 
     self.searchResults = [];
 
-    for(let key in searchProviders) {
-      let provider = searchProviders[key];
+    for(let key in self.supportedSearchProviders) {
+      let provider = self.supportedSearchProviders[key];
       if(self[provider]) {
         self[provider].doSearch(searchTerm).subscribe((res) => {
           self.searchResults.push(...self[provider].translateRequest(res));

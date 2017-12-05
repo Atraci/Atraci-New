@@ -31,9 +31,18 @@ export class Youtube implements IdataProvider {
     return `?${str.join("&")}`;
   }
 
-  public doSearch(searchVal: string) {
+  public doSearch(searchVal: string, idsOnly?: boolean) {
     let self = this;
-    return self.callToAPI(self.entities.SEARCH, { q: searchVal, maxResults: 50, part: "snippet" });
+    let callOptions = {
+      q: searchVal,
+      maxResults: 50
+    };
+
+    if(!idsOnly) {
+      callOptions["part"] = "snippet";
+    }
+
+    return self.callToAPI(self.entities.SEARCH, callOptions);
   }
 
   public translateRequest(res) {
@@ -48,6 +57,7 @@ export class Youtube implements IdataProvider {
       trackModel.source = "youtube";
       trackModel.artist = track["snippet"]["title"];
       trackModel.title = track["snippet"]["title"];
+      trackModel.videoId = track["id"]["videoId"];
 
       if (track["snippet"]["thumbnails"]) {
         trackModel.smallImage = track["snippet"]["thumbnails"]["default"]["url"] || null;

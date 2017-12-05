@@ -4,6 +4,11 @@
   background-color: $bg-dark;
   color: #fff;
 
+  .player-video-wrapper {
+    position: absolute;
+    bottom: 66px;
+  }
+
   .cover-image-wrapper {
     display: block;
     height: 100%;

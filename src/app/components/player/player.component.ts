@@ -3,6 +3,7 @@ import { YoutubeDalService } from '../../services/youtube-dal.service';
 import {PlayerControlService} from "./player-control.service";
 import {PlayerState} from "./player-state.enum";
 import {TrackModel} from "../main-view/track/track-model";
+import {PlayerAction} from "./player-action.enum";
 
 @Component({
   selector: 'app-player',
@@ -12,6 +13,8 @@ import {TrackModel} from "../main-view/track/track-model";
 export class PlayerComponent implements OnInit {
 
   public currentPlayingTrack: TrackModel;
+  public playerState = PlayerState;
+  public playerAction = PlayerAction;
 
   constructor(private youtubeDalService: YoutubeDalService, private playerControl: PlayerControlService) { }
 
@@ -19,22 +22,8 @@ export class PlayerComponent implements OnInit {
     this.youtubeDalService.generate();
   }
 
-  public play(): void {
-    this.playerControl.state = PlayerState.PLAYING;
+  callToAction(playerAction: PlayerAction) {
+    let self = this;
+    self.playerControl.callToAction(playerAction);
   }
-
-  public stop(): void {
-    this.playerControl.state = PlayerState.STOPPED;
-  }
-
-  public pause(): void {
-    this.playerControl.state = PlayerState.PAUSED;
-  }
-
-  public next(): void {}
-  public prev(): void {}
-  public shuffle(): void {}
-  public random(): void {}
-  public loop(): void {}
-  public addToPlaylist(): void {}
 }
