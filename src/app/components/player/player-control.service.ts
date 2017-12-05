@@ -23,8 +23,9 @@ export class PlayerControlService {
       let trackItems = self.yt.translateRequest(res),
         currentItem = trackItems[0];
 
-      self.ytDal.setVideo(currentItem);
-      self._currentPlayingTrack = currentItem;
+      value.videoId = currentItem.videoId;
+      self.ytDal.setVideo(value);
+      self._currentPlayingTrack = value;
 
       self.state = PlayerState.PLAYING;
     });

@@ -23,6 +23,11 @@ export class TrackComponent implements OnInit {
 
   itemClicked(): void {
     let self = this;
+
+    if(self.trackModel === self.playerController.currentPlayingTrack) {
+      return;
+    }
+
     self.playerController.currentPlayingTrack = self.trackModel;
   }
 }
