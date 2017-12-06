@@ -1,18 +1,17 @@
-<div class="container-fluid ninety-height">
+<div class="container-fluid full-height">
 
-  <div class="row ten-height logo-header">
+  <div class="row five-height logo-header">
     Atraci
   </div>
 
-  <div class="row ninety-height">
-    <app-sidemenu class="side-menu col-2"></app-sidemenu>
-    <div class="col-10 main-content-wrapper">
+  <div class="row ninety-five-height">
+    <!--<app-sidemenu class="side-menu col-2"></app-sidemenu>-->
+    <div class="col main-content-wrapper">
       <router-outlet></router-outlet>
     </div>
   </div>
 
-</div>
-
-<div class="row ten-height no-gutters">
-  <app-player class="col"></app-player>
+  <div class="row w-100 player-wrapper">
+    <app-player class="col"></app-player>
+  </div>
 </div>

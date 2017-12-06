@@ -5,4 +5,10 @@
     background-color: $bg-dark;
     color: $bg-light;
   }
+
+  .player-wrapper {
+    position: absolute;
+    height: 100px;
+    bottom: 0;
+  }
 }

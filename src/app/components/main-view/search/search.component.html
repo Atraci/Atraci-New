@@ -4,6 +4,6 @@
   </div>
 </form>
 
-<div class="searchResults row no-gutters" *ngIf="searchResults">
-  <app-track class="col-sm-2 m-2" *ngFor="let searchItem of searchResults" [trackModel]="searchItem"></app-track>
+<div class="searchResults row" *ngIf="searchResults">
+  <app-track class="col-sm-2 mb-3" *ngFor="let searchItem of searchResults" [trackModel]="searchItem"></app-track>
 </div>

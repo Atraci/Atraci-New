@@ -1,12 +1,13 @@
 @import "../../../assets/css/main-colors";
 
 :host {
+  opacity: 0.9;
   background-color: $bg-dark;
   color: #fff;
 
   .player-video-wrapper {
     position: absolute;
-    bottom: 106px;
+    top: -146px;
   }
 
   .cover-image-wrapper {

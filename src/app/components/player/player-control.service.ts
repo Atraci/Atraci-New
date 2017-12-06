@@ -4,7 +4,6 @@ import {PlayerState} from "./player-state.enum";
 import {Youtube} from "../../services/data-providers/youtube";
 import {YoutubeDalService} from "../../services/youtube-dal.service";
 import {PlayerAction} from "./player-action.enum";
-import * as moment from "moment";
 
 const Barn = require("barn");
 
@@ -23,7 +22,17 @@ export class PlayerControlService {
   public timer;
 
   constructor(private yt: Youtube, private ytDal: YoutubeDalService) {
-    this.barn = new Barn(localStorage);
+    let self = this;
+
+    self.barn = new Barn(localStorage);
+
+    self.ytDal.registerToYTEvent(2, () => {
+      self.callToAction.call(self, PlayerAction.PAUSE, true);
+    });
+
+    self.ytDal.registerToYTEvent(2, () => {
+      self.callToAction.call(self, PlayerAction.PLAY, true);
+    });
   }
 
   set currentPlayingTrack(value: TrackModel) {
@@ -62,11 +71,10 @@ export class PlayerControlService {
 
   initTimer() {
     let self = this;
-    debugger;
     self.timer = setInterval(() => {
-      //self.playerProgress.total = moment(self.ytDal.player.getDuration(), "mm").format("mm:ss");
       let duration = self.ytDal.player.getDuration();
       let current = self.ytDal.player.getCurrentTime();
+
       self.playerProgress.total = self.formatTime(duration);
       self.playerProgress.current = self.formatTime(current);
 
@@ -91,11 +99,11 @@ export class PlayerControlService {
     return `${minutesFormatted}:${secondsFormatted}`
   }
 
-  callToAction(action: PlayerAction) {
+  callToAction(action: PlayerAction, callFromYTEvent? : boolean) {
     let self = this;
     switch(action) {
       case PlayerAction.PLAY:
-        self.ytDal.player["playVideo"]();
+        if(!callFromYTEvent) self.ytDal.player["playVideo"]();
         self.state = PlayerState.PLAYING;
         self.initTimer();
         break;
@@ -107,7 +115,7 @@ export class PlayerControlService {
         break;
 
       case PlayerAction.PAUSE:
-        self.ytDal.player["pauseVideo"]();
+        if(!callFromYTEvent) self.ytDal.player["pauseVideo"]();
         self.state = PlayerState.PAUSED;
         self.resetTimer();
         break;
